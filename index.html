@@ -138,7 +138,21 @@ footer span{color:var(--coral);}
 /* TOAST */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--mint);color:#fff;font-weight:800;font-size:14px;padding:13px 30px;border-radius:40px;border:2px solid #2e7d32;box-shadow:3px 3px 0 #2e7d32;opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:999;white-space:nowrap;}
 
-/* ADMIN */
+/* RESUME */
+#resume{padding:64px 40px;background:#fff;}
+.resume-inner{max-width:720px;margin:0 auto;}
+.resume-block{margin-bottom:40px;}
+.resume-block-title{font-family:'Fredoka One',cursive;font-size:20px;color:var(--coral);margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid var(--yellow);}
+.resume-entry{display:flex;gap:20px;margin-bottom:20px;align-items:flex-start;}
+.resume-dot-col{display:flex;flex-direction:column;align-items:center;padding-top:4px;}
+.resume-dot{width:14px;height:14px;border-radius:50%;background:var(--yellow);border:2.5px solid var(--dark);flex-shrink:0;}
+.resume-line{width:2px;flex:1;background:#e0e0e0;margin-top:4px;min-height:20px;}
+.resume-entry-body{flex:1;}
+.resume-entry-title{font-weight:800;font-size:15px;margin-bottom:2px;}
+.resume-entry-sub{font-size:13px;color:var(--coral);font-weight:700;margin-bottom:4px;}
+.resume-entry-date{font-size:12px;color:var(--light);font-weight:700;margin-bottom:6px;}
+.resume-entry-desc{font-size:13px;color:var(--mid);line-height:1.65;}
+.resume-entry-desc li{margin-left:16px;margin-bottom:3px;}
 .edit-btn{display:none;}
 .admin-nav-btns{display:none;}
 body.admin-mode .edit-btn{display:inline-flex;}
@@ -168,6 +182,7 @@ body.admin-mode .admin-nav-btns{display:flex;gap:8px;align-items:center;}
     <li><a href="#about">About</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#resume">Resume</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <div style="display:flex;gap:8px;align-items:center;">
@@ -236,7 +251,119 @@ body.admin-mode .admin-nav-btns{display:flex;gap:8px;align-items:center;}
   </div>
 </section>
 
-<section id="contact">
+<section id="resume">
+  <div class="resume-inner">
+    <div class="sec-header">
+      <div><p class="sec-tag">Resume / CV</p><h2 class="sec-title">Background</h2></div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="resume-block">
+      <p class="resume-block-title">🎓 Education</p>
+
+      <div class="resume-entry">
+        <div class="resume-dot-col"><div class="resume-dot"></div><div class="resume-line"></div></div>
+        <div class="resume-entry-body">
+          <p class="resume-entry-title">Fashion Institute of Technology</p>
+          <p class="resume-entry-sub">Bachelor of Fine Arts, Toy Design · GPA 3.6 / 4.0</p>
+          <p class="resume-entry-date">Expected May 2027 · New York, NY</p>
+          <div class="resume-entry-desc"><ul>
+            <li>Toy Design and Product Rendering</li>
+            <li>Model Making and 3D Prototyping</li>
+            <li>Computer Graphics in Toy Design</li>
+          </ul></div>
+        </div>
+      </div>
+
+      <div class="resume-entry">
+        <div class="resume-dot-col"><div class="resume-dot" style="background:var(--lav);"></div><div class="resume-line"></div></div>
+        <div class="resume-entry-body">
+          <p class="resume-entry-title">FIT SUNY Korea</p>
+          <p class="resume-entry-sub">AAS, Fashion Business Management · GPA 3.5 / 4.0</p>
+          <p class="resume-entry-date">May 2023 · Incheon, South Korea</p>
+        </div>
+      </div>
+
+      <div class="resume-entry">
+        <div class="resume-dot-col"><div class="resume-dot" style="background:var(--mint);"></div></div>
+        <div class="resume-entry-body">
+          <p class="resume-entry-title">Cheongju University</p>
+          <p class="resume-entry-sub">Visual Communication Design · GPA 3.8 / 4.5</p>
+          <p class="resume-entry-date">May 2021 · Cheongju, South Korea</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="resume-block">
+      <p class="resume-block-title">💼 Work Experience</p>
+
+      <div class="resume-entry">
+        <div class="resume-dot-col"><div class="resume-dot" style="background:var(--coral);"></div><div class="resume-line"></div></div>
+        <div class="resume-entry-body">
+          <p class="resume-entry-title">Hudson Guild</p>
+          <p class="resume-entry-sub">Volunteer, Child Play Observation</p>
+          <p class="resume-entry-date">February 2025 – Present · New York, NY</p>
+          <div class="resume-entry-desc"><ul>
+            <li>Engaged directly with children through toy play, read-alouds, outdoor activities, and dancing.</li>
+            <li>Observed play behavior to inform toy concept development and identify what sustains engagement.</li>
+          </ul></div>
+        </div>
+      </div>
+
+      <div class="resume-entry">
+        <div class="resume-dot-col"><div class="resume-dot" style="background:var(--sky);"></div><div class="resume-line"></div></div>
+        <div class="resume-entry-body">
+          <p class="resume-entry-title">Mediquarters Inc.</p>
+          <p class="resume-entry-sub">Assistant Merchandising</p>
+          <p class="resume-entry-date">September 2024 – December 2024 · Seoul, South Korea</p>
+          <div class="resume-entry-desc"><ul>
+            <li>Designed product layouts and visual narratives for trend-driven ecommerce listings.</li>
+            <li>Improved visual clarity and brand consistency across multiple ecommerce sellers.</li>
+          </ul></div>
+        </div>
+      </div>
+
+      <div class="resume-entry">
+        <div class="resume-dot-col"><div class="resume-dot" style="background:var(--mint);"></div><div class="resume-line"></div></div>
+        <div class="resume-entry-body">
+          <p class="resume-entry-title">H-STYLE</p>
+          <p class="resume-entry-sub">Assistant Merchandising Director Intern Visual Creative</p>
+          <p class="resume-entry-date">March 2023 – June 2023 · Seoul, South Korea</p>
+          <div class="resume-entry-desc"><ul>
+            <li>Developed product imagery and promotional layouts for digital marketing campaigns.</li>
+            <li>Improved campaign engagement through refined layouts and consistent visual direction.</li>
+          </ul></div>
+        </div>
+      </div>
+
+      <div class="resume-entry">
+        <div class="resume-dot-col"><div class="resume-dot" style="background:#aaa;"></div></div>
+        <div class="resume-entry-body">
+          <p class="resume-entry-title">Republic of Korea Air Force</p>
+          <p class="resume-entry-sub">Active Duty Airman</p>
+          <p class="resume-entry-date">December 2017 – November 2019 · Incheon, South Korea</p>
+          <div class="resume-entry-desc"><ul>
+            <li>Worked in a highly collaborative operational environment emphasizing trust and discipline.</li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILLS & CERTS -->
+    <div class="resume-block">
+      <p class="resume-block-title">🛠️ Skills & Certifications</p>
+      <div class="resume-entry-desc" style="font-size:14px;line-height:2;">
+        <p><strong>Skills:</strong> Concept Development · Sketching · Layout and Composition · Color and Visual Hierarchy · Model Making</p>
+        <p><strong>Technologies:</strong> SolidWorks · BrickLink · Adobe Photoshop · Illustrator · Microsoft Excel · Word</p>
+        <p><strong>Interests:</strong> Toy Collecting · Creative Construction Systems · Sketching and Character Design · Climbing</p>
+        <p><strong>Certifications:</strong> ACA Illustrator · MOS Excel 2016 Expert</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
   <div style="max-width:640px;margin:0 auto;">
     <div class="sec-header" style="justify-content:center;gap:14px;">
       <div><p class="sec-tag">Contact</p><h2 class="sec-title">Let's Create Together!</h2></div>
