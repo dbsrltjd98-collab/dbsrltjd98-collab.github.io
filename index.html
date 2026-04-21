@@ -90,24 +90,19 @@ textarea{resize:vertical;min-height:80px;}
 .cat-tab{padding:8px 20px;border-radius:40px;font-size:12px;font-weight:700;border:2px solid;cursor:pointer;font-family:'Nunito',sans-serif;transition:all 0.15s;background:#fff;}
 .cat-tab:hover{filter:brightness(0.92);}
 
-/* 1열, 이미지 비율 자동 */
+/* 1열 카드 */
 .proj-grid{display:flex;flex-direction:column;gap:24px;}
 .proj-card{background:#fff;border-radius:18px;border:2.5px solid var(--dark);overflow:hidden;box-shadow:5px 5px 0 var(--dark);transition:transform 0.15s,box-shadow 0.15s;}
 .proj-card:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 var(--dark);}
-.proj-thumb{width:100%;aspect-ratio:4/5;position:relative;border-bottom:2px solid var(--dark);background:#f5f5f5;overflow:hidden;}
+/* 메인 이미지 */
+.proj-thumb{width:100%;aspect-ratio:4/5;position:relative;background:#f5f5f5;overflow:hidden;}
 .proj-thumb-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:120px;}
 .proj-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff;}
 .cat-badge{position:absolute;top:14px;right:14px;font-size:11px;font-weight:800;padding:5px 13px;border-radius:20px;border:1.5px solid var(--dark);background:rgba(255,255,255,0.93);z-index:2;}
-/* SLIDER */
-.slider-wrap{position:absolute;inset:0;display:flex;transition:transform 0.3s ease;}
-.slider-wrap img{width:100%;height:100%;object-fit:contain;background:#fff;flex-shrink:0;}
-.slider-btn{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.9);border:2px solid var(--dark);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;z-index:3;box-shadow:2px 2px 0 var(--dark);transition:background 0.12s;}
-.slider-btn:hover{background:var(--yellow);}
-.slider-btn.prev{left:10px;}
-.slider-btn.next{right:10px;}
-.slider-dots{position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:3;}
-.slider-dot{width:8px;height:8px;border-radius:50%;background:rgba(0,0,0,0.25);border:none;cursor:pointer;padding:0;transition:background 0.15s;}
-.slider-dot.active{background:var(--dark);}
+/* 추가 이미지 그리드 */
+.proj-sub-imgs{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:2px;border-top:2px solid var(--dark);}
+.proj-sub-imgs img{width:100%;aspect-ratio:1;object-fit:contain;background:#fafafa;display:block;}
+/* 편집 모달 썸네일 */
 .img-thumb-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
 .img-thumb-item{position:relative;width:56px;}
 .img-thumb-item img{width:56px;height:68px;border-radius:8px;object-fit:contain;border:2px solid #ddd;background:#f5f5f5;display:block;}
@@ -258,24 +253,24 @@ let data={
   bio:"I'm a BFA Toy Design student at FIT in New York. I believe toys are more than objects — they're tools for children to explore the world, build connections, and discover themselves.",
   pills:['Toy Design','Child Development','Play Research','3D Modeling','Marketing'],
   projects:[
-    {emoji:'🐧',title:'Interactive Penguin Toy',desc:'An interactive penguin toy that sings and dances in response to button presses, helping infants develop sensory awareness and cause-and-effect understanding.',bg:'#E3F2FD',cat:'Toy Concept',imgs:[]},
-    {emoji:'🐉',title:'Dragon Rider Doll',desc:'Inspired by How to Train Your Dragon. Encourages imaginative role-play with dragon and rider adventures for young children.',bg:'#F3E5F5',cat:'Toy Concept',imgs:[]},
-    {emoji:'🤖',title:'WALL-E Molding Toy',desc:'A licensed three-step molding toy where children press, shape, and release clay to create different forms inspired by WALL-E.',bg:'#E8F5E9',cat:'Toy Concept',imgs:[]},
-    {emoji:'🧟',title:'Zombie Brain Kinetic Sand',desc:'Children form colorful zombie brains using a brain-shaped dome with kinetic sand. Multiple brains can be made and swapped.',bg:'#E0F7FA',cat:'Toy Concept',imgs:[]},
-    {emoji:'🦈',title:'Captain Shark Ride-On',desc:"A toddler ride-on shark toy. Pressing the handle button releases water through the shark's mouth for interactive play.",bg:'#E3F2FD',cat:'Toy Concept',imgs:[]},
-    {emoji:'🧁',title:'Sweet Saver',desc:'Firefighter equipment reimagined with dessert designs — macaron bubble container, cupcake helmet, and a donut extinguisher that blows bubbles.',bg:'#FCE4EC',cat:'Toy Concept',imgs:[]},
-    {emoji:'🐛',title:'Zippy Bitsy Bug',desc:'A pull-back toy with a simple mechanism. Features various insect versions for added variety and play appeal.',bg:'#F1F8E9',cat:'Toy Concept',imgs:[]},
-    {emoji:'⚡',title:'Volt Kid',desc:'A boy doll with a lightning bolt on his chest. Pressing the button makes it light up.',bg:'#FFF8E1',cat:'Toy Concept',imgs:[]},
-    {emoji:'👃',title:'Sneefy',desc:'A storybook character who expresses emotions through body scent. Reflects the experience of arriving in a new country and being understood over time.',bg:'#F3E5F5',cat:'Toy Concept',imgs:[]},
-    {emoji:'🦋',title:'Cocoon to Butterfly Plush',desc:'Stored inside a cocoon bag, pulling out the wings transforms it into a butterfly — teaching metamorphosis through play.',bg:'#FFF8E1',cat:'Plush',imgs:[]},
-    {emoji:'👃',title:'Sneefy',desc:'A storybook character who expresses emotions through body scent. Reflects the experience of arriving in a new country and being understood over time.',bg:'#F3E5F5',cat:'Plush',imgs:[]},
-    {emoji:'🐘',title:'Elephant Plush',desc:'A soft and huggable elephant plush toy with a gentle, friendly design.',bg:'#E0F7FA',cat:'Plush',imgs:[]},
-    {emoji:'🎈',title:'Balloon Dog Plush',desc:'A plush interpretation of the iconic balloon dog, translated into a soft and squeezable toy.',bg:'#FCE4EC',cat:'Plush',imgs:[]},
-    {emoji:'📱',title:'Toy Phone (Rabbit)',desc:'A rabbit-shaped toy phone modeled in SolidWorks as a product design exercise.',bg:'#E8F5E9',cat:'SolidWorks',imgs:[]},
-    {emoji:'🚛',title:'Toy Truck',desc:'A toy truck 3D model created in SolidWorks, focusing on mechanical form and proportion.',bg:'#E8F5E9',cat:'SolidWorks',imgs:[]},
-    {emoji:'🦈',title:'Jaws Cube Figure',desc:'A cube-shaped figure inspired by the movie Jaws, sculpted in ZBrush.',bg:'#E3F2FD',cat:'ZBrush',imgs:[]},
-    {emoji:'💥',title:'Deadpool Figure',desc:'A character figure of the main protagonist from Deadpool, sculpted in ZBrush.',bg:'#FCE4EC',cat:'ZBrush',imgs:[]},
-    {emoji:'🧱',title:'LEGO Student Challenge',desc:'Represents modern life in LEGO — capturing how spontaneous moments like dancing or singing reconnect people in a digital world.',bg:'#FFF3E0',cat:'Competition',imgs:[]},
+    {emoji:'🐧',title:'Interactive Penguin Toy',desc:'An interactive penguin toy that sings and dances in response to button presses, helping infants develop sensory awareness and cause-and-effect understanding.',bg:'#E3F2FD',cat:'Toy Concept',mainImg:null,imgs:[]},
+    {emoji:'🐉',title:'Dragon Rider Doll',desc:'Inspired by How to Train Your Dragon. Encourages imaginative role-play with dragon and rider adventures for young children.',bg:'#F3E5F5',cat:'Toy Concept',mainImg:null,imgs:[]},
+    {emoji:'🤖',title:'WALL-E Molding Toy',desc:'A licensed three-step molding toy where children press, shape, and release clay to create different forms inspired by WALL-E.',bg:'#E8F5E9',cat:'Toy Concept',mainImg:null,imgs:[]},
+    {emoji:'🧟',title:'Zombie Brain Kinetic Sand',desc:'Children form colorful zombie brains using a brain-shaped dome with kinetic sand. Multiple brains can be made and swapped.',bg:'#E0F7FA',cat:'Toy Concept',mainImg:null,imgs:[]},
+    {emoji:'🦈',title:'Captain Shark Ride-On',desc:"A toddler ride-on shark toy. Pressing the handle button releases water through the shark's mouth for interactive play.",bg:'#E3F2FD',cat:'Toy Concept',mainImg:null,imgs:[]},
+    {emoji:'🧁',title:'Sweet Saver',desc:'Firefighter equipment reimagined with dessert designs — macaron bubble container, cupcake helmet, and a donut extinguisher that blows bubbles.',bg:'#FCE4EC',cat:'Toy Concept',mainImg:null,imgs:[]},
+    {emoji:'🐛',title:'Zippy Bitsy Bug',desc:'A pull-back toy with a simple mechanism. Features various insect versions for added variety and play appeal.',bg:'#F1F8E9',cat:'Toy Concept',mainImg:null,imgs:[]},
+    {emoji:'⚡',title:'Volt Kid',desc:'A boy doll with a lightning bolt on his chest. Pressing the button makes it light up.',bg:'#FFF8E1',cat:'Toy Concept',mainImg:null,imgs:[]},
+    {emoji:'👃',title:'Sneefy',desc:'A storybook character who expresses emotions through body scent. Reflects the experience of arriving in a new country and being understood over time.',bg:'#F3E5F5',cat:'Toy Concept',mainImg:null,imgs:[]},
+    {emoji:'🦋',title:'Cocoon to Butterfly Plush',desc:'Stored inside a cocoon bag, pulling out the wings transforms it into a butterfly — teaching metamorphosis through play.',bg:'#FFF8E1',cat:'Plush',mainImg:null,imgs:[]},
+    {emoji:'👃',title:'Sneefy',desc:'A storybook character who expresses emotions through body scent. Reflects the experience of arriving in a new country and being understood over time.',bg:'#F3E5F5',cat:'Plush',mainImg:null,imgs:[]},
+    {emoji:'🐘',title:'Elephant Plush',desc:'A soft and huggable elephant plush toy with a gentle, friendly design.',bg:'#E0F7FA',cat:'Plush',mainImg:null,imgs:[]},
+    {emoji:'🎈',title:'Balloon Dog Plush',desc:'A plush interpretation of the iconic balloon dog, translated into a soft and squeezable toy.',bg:'#FCE4EC',cat:'Plush',mainImg:null,imgs:[]},
+    {emoji:'📱',title:'Toy Phone (Rabbit)',desc:'A rabbit-shaped toy phone modeled in SolidWorks as a product design exercise.',bg:'#E8F5E9',cat:'SolidWorks',mainImg:null,imgs:[]},
+    {emoji:'🚛',title:'Toy Truck',desc:'A toy truck 3D model created in SolidWorks, focusing on mechanical form and proportion.',bg:'#E8F5E9',cat:'SolidWorks',mainImg:null,imgs:[]},
+    {emoji:'🦈',title:'Jaws Cube Figure',desc:'A cube-shaped figure inspired by the movie Jaws, sculpted in ZBrush.',bg:'#E3F2FD',cat:'ZBrush',mainImg:null,imgs:[]},
+    {emoji:'💥',title:'Deadpool Figure',desc:'A character figure of the main protagonist from Deadpool, sculpted in ZBrush.',bg:'#FCE4EC',cat:'ZBrush',mainImg:null,imgs:[]},
+    {emoji:'🧱',title:'LEGO Student Challenge',desc:'Represents modern life in LEGO — capturing how spontaneous moments like dancing or singing reconnect people in a digital world.',bg:'#FFF3E0',cat:'Competition',mainImg:null,imgs:[]},
   ],
   skills:['Toy Design','ZBrush','Maya','SolidWorks','Sketch Rendering','Child Development','Play Research','Marketing','Brand Strategy','Prototyping','KeyShot'],
   contactSub:"Whether it's an internship, collaboration, or just a conversation about toys — I'd love to hear from you.",
@@ -300,46 +295,21 @@ function renderProjects(){
   document.getElementById('v-proj-grid').innerHTML=filtered.map(p=>{
     const realIdx=data.projects.indexOf(p);
     const cs=CAT_STYLE[p.cat]||CAT_STYLE['전체'];
-    const imgs=p.imgs||[];
-    const hasImgs=imgs.length>0;
-    const slideId='sl-'+realIdx;
+    const subImgs=p.imgs||[];
     return `<div class="proj-card">
-      <div class="proj-thumb" style="background:${p.bg}" id="thumb-${realIdx}">
-        ${hasImgs?`
-          <div class="slider-wrap" id="${slideId}" style="width:${imgs.length*100}%;">
-            ${imgs.map(src=>`<img src="${src}" alt="${p.title}" style="width:${100/imgs.length}%;height:100%;object-fit:contain;background:#fff;flex-shrink:0;">`).join('')}
-          </div>
-          ${imgs.length>1?`
-            <button class="slider-btn prev" onclick="slideMove(${realIdx},-1)">‹</button>
-            <button class="slider-btn next" onclick="slideMove(${realIdx},1)">›</button>
-            <div class="slider-dots" id="dots-${realIdx}">
-              ${imgs.map((_,i)=>`<button class="slider-dot${i===0?' active':''}" onclick="slideTo(${realIdx},${i})"></button>`).join('')}
-            </div>`:''}
-        `:`<div class="proj-thumb-inner"><span>${p.emoji}</span></div>`}
+      <div class="proj-thumb" style="background:${p.bg}">
+        ${p.mainImg
+          ? `<img src="${p.mainImg}" alt="${p.title}">`
+          : `<div class="proj-thumb-inner"><span>${p.emoji}</span></div>`}
         <span class="cat-badge" style="border-color:${cs.border};color:${cs.border};">${p.cat}</span>
       </div>
-      <div class="proj-body">
+      ${subImgs.length>0?`<div class="proj-sub-imgs">${subImgs.map(src=>`<img src="${src}" alt="${p.title}">`).join('')}</div>`:''}
+      <div class="proj-body" style="border-top:2px solid var(--dark);">
         <div class="proj-body-text"><h3>${p.title}</h3><p>${p.desc}</p></div>
         <button class="edit-btn" style="flex-shrink:0;" onclick="openProjEdit(${realIdx})">✏️</button>
       </div>
     </div>`;
   }).join('');
-}
-const slideIdx={};
-function slideMove(idx,dir){
-  const p=data.projects[idx];
-  const imgs=p.imgs||[];
-  if(imgs.length<=1)return;
-  slideIdx[idx]=(((slideIdx[idx]||0)+dir)%imgs.length+imgs.length)%imgs.length;
-  slideTo(idx,slideIdx[idx]);
-}
-function slideTo(idx,i){
-  slideIdx[idx]=i;
-  const wrap=document.getElementById('sl-'+idx);
-  const imgs=data.projects[idx].imgs||[];
-  if(wrap)wrap.style.transform=`translateX(-${i*(100/imgs.length)}%)`;
-  const dots=document.querySelectorAll(`#dots-${idx} .slider-dot`);
-  dots.forEach((d,j)=>d.classList.toggle('active',j===i));
 }
 function renderAll(){
   document.getElementById('v-accent').textContent=data.accent;
@@ -429,8 +399,14 @@ function renderProjSingle(idx){
   const imgs=p.imgs||[];
   document.getElementById('modal-body').innerHTML=`
     <button class="back-btn" onclick="backToProjList()">← 목록으로</button>
-    <label>이미지 업로드 (여러 장 가능)</label>
-    <div class="upload-area" onclick="document.getElementById('m-pimg').click()">📁 클릭해서 이미지 추가 (여러 장 선택 가능)<input type="file" id="m-pimg" accept="image/*" multiple onchange="handleProjImgs(this)"></div>
+    <label>📌 메인 이미지 (대표 이미지 1장)</label>
+    <div class="upload-area" onclick="document.getElementById('m-main-img').click()">📁 메인 이미지 업로드<input type="file" id="m-main-img" accept="image/*" onchange="handleMainImg(this)"></div>
+    ${p.mainImg?`<div style="margin-top:8px;display:flex;align-items:center;gap:8px;">
+      <img src="${p.mainImg}" style="width:56px;height:68px;border-radius:8px;object-fit:contain;border:2px solid #ddd;background:#f5f5f5;">
+      <button class="del-btn" onclick="data.projects[${idx}].mainImg=null;renderProjSingle(${idx});">삭제</button>
+    </div>`:''}
+    <label style="margin-top:16px;">🖼️ 추가 이미지 (여러 장)</label>
+    <div class="upload-area" onclick="document.getElementById('m-pimg').click()">📁 추가 이미지 업로드 (여러 장 선택 가능)<input type="file" id="m-pimg" accept="image/*" multiple onchange="handleProjImgs(this)"></div>
     ${imgs.length>0?`<div class="img-thumb-row">${imgs.map((src,i)=>`
       <div class="img-thumb-item">
         <img src="${src}">
@@ -442,7 +418,7 @@ function renderProjSingle(idx){
     <label>배경 색</label><input type="text" id="m-p-bg" value="${p.bg}" style="max-width:130px;">
     <label>제목</label><input type="text" id="m-p-title" value="${p.title}">
     <label>설명</label><textarea id="m-p-desc">${p.desc}</textarea>
-    <button class="del-btn" style="margin-top:14px;width:100%;padding:10px;" onclick="deleteProject(${idx})">🗑️ 삭제</button>`;
+    <button class="del-btn" style="margin-top:14px;width:100%;padding:10px;" onclick="deleteProject(${idx})">🗑️ 프로젝트 삭제</button>`;
 }
 function backToProjList(){currentModal='projects';editProjIdx=null;document.getElementById('modal-title-text').textContent='🎨 Projects';renderProjList(document.getElementById('modal-body'));}
 function renderSkillEditor(b){
@@ -452,9 +428,15 @@ function renderSkillEditor(b){
 }
 function addSkillFromModal(){data.skills.push('새 스킬');renderSkillEditor(document.getElementById('modal-body'));}
 function deleteSkillFromModal(i){data.skills.splice(i,1);renderSkillEditor(document.getElementById('modal-body'));}
-function addProject(){data.projects.push({emoji:'🎁',title:'새 프로젝트',desc:'설명을 입력하세요.',bg:PROJ_COLORS[data.projects.length%PROJ_COLORS.length],cat:'Toy Concept',imgs:[]});openProjEditFromList(data.projects.length-1);}
+function addProject(){data.projects.push({emoji:'🎁',title:'새 프로젝트',desc:'설명을 입력하세요.',bg:PROJ_COLORS[data.projects.length%PROJ_COLORS.length],cat:'Toy Concept',mainImg:null,imgs:[]});openProjEditFromList(data.projects.length-1);}
 function deleteProject(idx){data.projects.splice(idx,1);saveToStorage();renderAll();backToProjList();}
 function handleAvatarUpload(input){const f=input.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{data.avatarImg=e.target.result;renderModalBody('about');};r.readAsDataURL(f);}
+function handleMainImg(input){
+  const f=input.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{data.projects[editProjIdx].mainImg=e.target.result;renderProjSingle(editProjIdx);};
+  r.readAsDataURL(f);
+}
 function handleProjImgs(input){
   const files=Array.from(input.files);if(!files.length)return;
   let loaded=0;
