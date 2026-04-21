@@ -426,7 +426,7 @@ function openProjEditFromList(idx){editProjIdx=idx;currentModal='proj-single';do
 function renderProjSingle(idx){
   const p=data.projects[idx];
   const imgs=p.imgs||[];
-  const base='https://dbsrltjd98.github.io/images/';
+  const base='https://dbsrltjd98-collab.github.io/images/';
   document.getElementById('modal-body').innerHTML=`
     <button class="back-btn" onclick="backToProjList()">← 목록으로</button>
     <p style="font-size:12px;color:var(--light);margin-bottom:14px;line-height:1.6;">💡 GitHub <code>images</code> 폴더에 파일 올리고 파일 이름만 입력하면 돼!</p>
@@ -517,7 +517,7 @@ function saveModal(){
   if(currentModal==='hero'){data.accent=document.getElementById('m-accent').value;data.tagline=document.getElementById('m-tagline').value;}
   else if(currentModal==='about'){data.avatarEmoji=document.getElementById('m-emoji').value;data.bio=document.getElementById('m-bio').value;data.pills=document.getElementById('m-pills').value.split(',').map(s=>s.trim()).filter(Boolean);}
   else if(currentModal==='proj-single'&&editProjIdx!==null){
-    const base='https://dbsrltjd98.github.io/images/';
+    const base='https://dbsrltjd98-collab.github.io/images/';
     const mainFname=document.getElementById('m-main-fname').value.trim();
     data.projects[editProjIdx].mainImg=mainFname?base+mainFname:null;
     const subFnames=document.getElementById('m-sub-fnames').value.split('\n').map(s=>s.trim()).filter(Boolean);
