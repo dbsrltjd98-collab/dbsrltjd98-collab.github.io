@@ -440,11 +440,10 @@ let data={
   email:'your@email.com',linkedin:'LinkedIn',insta:'Instagram',
 };
 
-let currentModal=null,editProjIdx=null,activeCat='전체';
+let currentModal=null,editProjIdx=null,activeCat='Toy Concept';
 
 function renderCatTabs(){
-  const allCats=['전체',...CATS];
-  document.getElementById('cat-tabs').innerHTML=allCats.map(c=>{
+  document.getElementById('cat-tabs').innerHTML=CATS.map(c=>{
     const s=CAT_STYLE[c]||CAT_STYLE['전체'];
     const isActive=c===activeCat;
     return `<button class="cat-tab${isActive?' active':''}"
@@ -454,7 +453,7 @@ function renderCatTabs(){
 }
 function setCat(c){activeCat=c;renderCatTabs();renderProjects();}
 function renderProjects(){
-  const filtered=activeCat==='전체'?data.projects:data.projects.filter(p=>p.cat===activeCat);
+  const filtered=data.projects.filter(p=>p.cat===activeCat);
   document.getElementById('v-proj-grid').innerHTML=filtered.map(p=>{
     const realIdx=data.projects.indexOf(p);
     const cs=CAT_STYLE[p.cat]||CAT_STYLE['전체'];
@@ -688,7 +687,7 @@ function saveModal(){
   }
   else if(currentModal==='contact'){data.email=document.getElementById('m-email').value;data.linkedin=document.getElementById('m-linkedin').value;data.insta=document.getElementById('m-insta').value;data.contactSub=document.getElementById('m-contact-sub').value;}
   saveToStorage();
-  activeCat='전체';renderAll();closeModal();showToast();
+  activeCat='Toy Concept';renderAll();closeModal();showToast();
 }
 function deleteProject(idx){data.projects.splice(idx,1);saveToStorage();renderAll();backToProjList();}
 function closeModal(){document.getElementById('modal-overlay').classList.remove('open');currentModal=null;editProjIdx=null;}
