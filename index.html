@@ -138,6 +138,20 @@ footer span{color:var(--coral);}
 /* TOAST */
 .toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--mint);color:#fff;font-weight:800;font-size:14px;padding:13px 30px;border-radius:40px;border:2px solid #2e7d32;box-shadow:3px 3px 0 #2e7d32;opacity:0;transition:opacity 0.3s;pointer-events:none;z-index:999;white-space:nowrap;}
 
+/* ADMIN */
+.edit-btn{display:none;}
+.admin-nav-btns{display:none;}
+body.admin-mode .edit-btn{display:inline-flex;}
+body.admin-mode .admin-nav-btns{display:flex;gap:8px;align-items:center;}
+.pw-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);display:flex;align-items:center;justify-content:center;z-index:300;opacity:0;pointer-events:none;transition:opacity 0.2s;}
+.pw-overlay.open{opacity:1;pointer-events:all;}
+.pw-box{background:#fff;border-radius:20px;border:2.5px solid var(--dark);padding:28px;width:min(340px,90vw);box-shadow:6px 6px 0 var(--dark);text-align:center;}
+.pw-box h3{font-family:'Fredoka One',cursive;font-size:22px;margin-bottom:16px;}
+.pw-box input{width:100%;padding:10px 14px;border:1.5px solid #ddd;border-radius:10px;font-family:'Nunito',sans-serif;font-size:16px;text-align:center;letter-spacing:4px;outline:none;margin-bottom:12px;}
+.pw-box input:focus{border-color:var(--coral);}
+.pw-submit{width:100%;padding:12px;background:var(--coral);color:#fff;border:none;border-radius:12px;font-family:'Nunito',sans-serif;font-weight:800;font-size:15px;cursor:pointer;box-shadow:3px 3px 0 #c0392b;}
+.pw-error{color:var(--coral);font-size:13px;font-weight:700;margin-top:8px;display:none;}
+
 @media(max-width:600px){
   nav{padding:0 20px;}
   nav ul{gap:12px;}
@@ -156,8 +170,24 @@ footer span{color:var(--coral);}
     <li><a href="#skills">Skills</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
-  <button onclick="saveToStorage();showToast();" style="background:var(--dark);color:#fff;border:none;border-radius:30px;padding:8px 18px;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;cursor:pointer;box-shadow:2px 2px 0 #888;transition:transform 0.12s;">💾 저장</button>
+  <div style="display:flex;gap:8px;align-items:center;">
+    <div class="admin-nav-btns">
+      <button onclick="saveToStorage();showToast();" style="background:var(--dark);color:#fff;border:none;border-radius:30px;padding:8px 16px;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;cursor:pointer;box-shadow:2px 2px 0 #888;">💾 저장</button>
+      <button onclick="exportHTML();" style="background:var(--coral);color:#fff;border:none;border-radius:30px;padding:8px 16px;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;cursor:pointer;box-shadow:2px 2px 0 #888;">📥 내보내기</button>
+      <button onclick="exitAdmin();" style="background:#fff;color:var(--dark);border:2px solid var(--dark);border-radius:30px;padding:8px 16px;font-family:'Nunito',sans-serif;font-weight:800;font-size:12px;cursor:pointer;">🔓 나가기</button>
+    </div>
+    <button onclick="openPwOverlay();" id="admin-lock-btn" style="background:transparent;color:var(--light);border:none;cursor:pointer;font-size:20px;padding:4px;">🔒</button>
+  </div>
 </nav>
+
+<div class="pw-overlay" id="pw-overlay">
+  <div class="pw-box">
+    <h3>🔐 관리자 모드</h3>
+    <input type="password" id="pw-input" placeholder="비밀번호" maxlength="10" onkeydown="if(event.key==='Enter')checkPw()">
+    <button class="pw-submit" onclick="checkPw()">확인</button>
+    <p class="pw-error" id="pw-error">비밀번호가 틀렸어!</p>
+  </div>
+</div>
 
 <section id="hero">
   <div class="hero-bubble" style="width:300px;height:300px;background:#FFD93D;top:-80px;right:-80px;"></div>
@@ -536,6 +566,27 @@ function deleteProject(idx){data.projects.splice(idx,1);saveToStorage();renderAl
 function closeModal(){document.getElementById('modal-overlay').classList.remove('open');currentModal=null;editProjIdx=null;}
 function handleOverlayClick(e){if(e.target===document.getElementById('modal-overlay'))closeModal();}
 function showToast(){const t=document.getElementById('toast');t.style.opacity='1';clearTimeout(t._t);t._t=setTimeout(()=>t.style.opacity='0',2200);}
+function openPwOverlay(){document.getElementById('pw-overlay').classList.add('open');document.getElementById('pw-input').value='';document.getElementById('pw-error').style.display='none';setTimeout(()=>document.getElementById('pw-input').focus(),100);}
+function checkPw(){
+  const val=document.getElementById('pw-input').value;
+  if(val==='1455'){
+    document.getElementById('pw-overlay').classList.remove('open');
+    document.body.classList.add('admin-mode');
+    document.getElementById('admin-lock-btn').style.display='none';
+  } else {
+    document.getElementById('pw-error').style.display='block';
+    document.getElementById('pw-input').value='';
+  }
+}
+function exitAdmin(){document.body.classList.remove('admin-mode');document.getElementById('admin-lock-btn').style.display='';}
+function exportHTML(){
+  const html=document.documentElement.outerHTML;
+  const blob=new Blob([html],{type:'text/html'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='index.html';
+  a.click();
+}
 loadFromStorage();
 renderAll();
 </script>
