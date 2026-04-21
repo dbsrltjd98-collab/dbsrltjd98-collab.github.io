@@ -501,12 +501,37 @@ function imgDragDrop(e,projIdx,targetI){
 }
 function imgDragEnd(){imgDragSrc=null;document.querySelectorAll('.img-thumb-item').forEach(el=>{el.style.opacity='1';el.style.outline='';});}
 function saveToStorage(){
-  try{localStorage.setItem('kiseong_portfolio',JSON.stringify(data));}catch(e){console.warn('저장 실패',e);}
+  try{
+    // 이미지 따로, 텍스트 따로 저장
+    const textData=JSON.parse(JSON.stringify(data));
+    const imgData={avatarImg:data.avatarImg,projects:data.projects.map(p=>({mainImg:p.mainImg,imgs:p.imgs||[]}))};
+    textData.avatarImg=null;
+    textData.projects=textData.projects.map(p=>({...p,mainImg:null,imgs:[]}));
+    localStorage.setItem('kiseong_text',JSON.stringify(textData));
+    try{
+      localStorage.setItem('kiseong_imgs',JSON.stringify(imgData));
+    }catch(e){
+      console.warn('이미지 저장 용량 초과, 텍스트만 저장됨');
+    }
+    console.log('저장 완료');
+  }catch(e){console.warn('저장 실패',e);}
 }
 function loadFromStorage(){
   try{
-    const saved=localStorage.getItem('kiseong_portfolio');
-    if(saved){data=JSON.parse(saved);}
+    const savedText=localStorage.getItem('kiseong_text');
+    const savedImgs=localStorage.getItem('kiseong_imgs');
+    if(savedText){
+      data=JSON.parse(savedText);
+      if(savedImgs){
+        const imgs=JSON.parse(savedImgs);
+        data.avatarImg=imgs.avatarImg||null;
+        data.projects=data.projects.map((p,i)=>({
+          ...p,
+          mainImg:(imgs.projects[i]&&imgs.projects[i].mainImg)||null,
+          imgs:(imgs.projects[i]&&imgs.projects[i].imgs)||[],
+        }));
+      }
+    }
   }catch(e){console.warn('불러오기 실패',e);}
 }
 function saveModal(){
